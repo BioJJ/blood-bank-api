@@ -1,11 +1,16 @@
 package io.github.biojj.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
 
     @Id
@@ -29,4 +34,16 @@ public class Address {
 
     @Column(name = "state")
     private String estado;
+
+    @Builder
+    public Address(String cep, String endereco,String numero,String bairro,String cidade,String estado){
+        this.cep = cep;
+        this.endereco = endereco;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+
+    }
+
 }
