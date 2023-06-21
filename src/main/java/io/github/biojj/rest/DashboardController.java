@@ -1,33 +1,51 @@
 package io.github.biojj.rest;
 
 
-import io.github.biojj.exception.UserExistingException;
-import io.github.biojj.model.entity.User;
-import io.github.biojj.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import io.github.biojj.rest.dto.AverageAgeByBloodType;
+import io.github.biojj.rest.dto.CandidatesByState;
+import io.github.biojj.rest.dto.DonorsForEachBloodType;
+import io.github.biojj.rest.dto.PercentObese;
+import io.github.biojj.service.CandidateService;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/dashboard")
 @CrossOrigin(origins = "*")
-public class UserController {
+public class DashboardController {
 
-    private final UserService userService;
+    private final CandidateService candidateService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public DashboardController(CandidateService candidateService) {
+        this.candidateService = candidateService;
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void salvar(@RequestBody @Valid User user) {
-        try {
-            userService.save(user);
-        } catch (UserExistingException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+    @GetMapping("candidate-by-state")
+    public List<CandidatesByState> countCandidatesByState() {
+        return candidateService.countCandidatesByState();
+    }
+
+    @GetMapping("average-age-by-blood-type")
+    public List<AverageAgeByBloodType> averageAgeByBloodType() {
+        return candidateService.averageAgeByBloodType();
+    }
+
+    @GetMapping("donors-for-each-blood-type")
+    public List<DonorsForEachBloodType> donorsForEachBloodType() {
+        return candidateService.donorsForEachBloodType();
+    }
+
+    @GetMapping("percent-obese-men")
+    public List<PercentObese> percentObeseMen() {
+        return candidateService.percentObeseMen();
+    }
+
+    @GetMapping("percentage-obese-woman")
+    public List<PercentObese> percentageObeseWoman() {
+        return candidateService.percentageObeseWoman();
     }
 }
