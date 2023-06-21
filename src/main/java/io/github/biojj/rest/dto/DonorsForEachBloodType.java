@@ -9,15 +9,15 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-public class AverageAgeByBloodType {
+public class DonorsForEachBloodType {
 
-    private String bloodType;
-    private BigDecimal average;
+    private String receiver;
+    private BigDecimal quantity;
 
     @Builder
-    public AverageAgeByBloodType(String bloodType, BigDecimal average){
-        this.bloodType = bloodType;
-        this.average = average;
+    public DonorsForEachBloodType(String receiver, BigDecimal quantity){
+        this.receiver = receiver;
+        this.quantity = quantity;
 
     }
 }

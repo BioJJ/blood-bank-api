@@ -5,17 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
-public class CandidatesByState {
+public class AverageAgeByBloodType {
 
-    private String state;
-    private Integer amount;
+    private String bloodType;
+    private BigDecimal average;
 
     @Builder
-    public CandidatesByState(String state, Integer amount){
-        this.state = state;
-        this.amount = amount;
+    public AverageAgeByBloodType(String bloodType, BigDecimal average){
+        this.bloodType = bloodType;
+        this.average = average;
 
     }
 }
